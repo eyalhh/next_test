@@ -7,6 +7,8 @@ export default function Home() {
   console.log(" == in client == ")
 
   const [url, setUrl] = useState("");
+  const [code, setCode] = useState("");
+  const [urlShown, setUrlShown] = useState(false);
 
   
   console.log(url);
@@ -26,8 +28,10 @@ export default function Home() {
     )
     
     const { code } = await response.json();
+    setCode(code);
 
-    console.log(code);
+    setUrlShown(true);
+
 
   }
 
@@ -47,6 +51,9 @@ export default function Home() {
         type="submit"
         className="bg-purple-600 rounded-lg text-gray-300 font-sans font-bold text-lg px-4 py-2">Generate URL</button>
       </form>
+      {urlShown &&
+        <h2 className="text-white font-bold text-3xl font-sans mt-10">{`localhost:3000/${code}`}</h2>
+      }
     </div>
   )
 }
