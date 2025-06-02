@@ -2,19 +2,40 @@
 
 import { useState } from "react";
 
+
 export default function Home() {
   console.log(" == in client == ")
 
   const [url, setUrl] = useState("");
 
+  
+  console.log(url);
 
-  console.log(url)
+  async function handleSubmit(e: React.FormEvent) {
+
+    e.preventDefault();
+
+    const response = await fetch(
+      "/api/register-url",
+      { method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+      }
+    )
+    
+    const { data } = await response.json();
+
+    console.log(data);
+
+  }
 
   return (
     <div className="h-screen flex flex-col items-center">
       <h1 className="text-gray-300 font-bold text-3xl mt-5 text-center">Url Shortener Website</h1>
       <form 
-        onSubmit={(e)=>{e.preventDefault();console.log("trying to do something here...");}} 
+        onSubmit={handleSubmit} 
         className="flex justify-center mt-10 gap-4">
         <input 
         type="text" 
