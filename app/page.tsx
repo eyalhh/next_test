@@ -25,9 +25,9 @@ export default function Home() {
       }
     )
     
-    const { data } = await response.json();
+    const { code } = await response.json();
 
-    console.log(data);
+    console.log(code);
 
   }
 
