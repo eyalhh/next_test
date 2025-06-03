@@ -12,10 +12,6 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ data: reuslt.rows[0] });
     } catch (error) {
-        return NextResponse.json({ error: error }, { status: 500 });
+        return NextResponse.json({ error: "db failed" });
     }
-}
-
-export async function GET() {
-    return NextResponse.json(null);
 }
