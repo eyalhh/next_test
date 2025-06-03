@@ -13,7 +13,12 @@ export default async function Page({ params }) {
       });
     
     const { data } = await response.json();
-      
+    
+
+    // if short code not registered in pg then redirect to home page.
+    if ( data == null ) {
+      redirect("/");
+    }
     // redirect to the original url;
     redirect(data.original_url);
     

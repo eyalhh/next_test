@@ -1,5 +1,6 @@
 "use client"
 
+import { Copy } from 'lucide-react'
 import { useState } from "react";
 
 
@@ -11,7 +12,7 @@ export default function Home() {
   const [urlShown, setUrlShown] = useState(false);
 
   
-  console.log(url);
+
 
   async function handleSubmit(e: React.FormEvent) {
 
@@ -35,9 +36,15 @@ export default function Home() {
 
   }
 
+
+
+  function handleCopy() {
+    navigator.clipboard.writeText(`localhost:3000/${code}`);
+  }
+
   return (
     <div className="h-screen flex flex-col items-center">
-      <h1 className="text-gray-300 font-bold text-3xl mt-5 text-center">Url Shortener Website</h1>
+      <h1 className="text-gray-200 font-bold text-3xl mt-5 text-center">Url Shortener Website</h1>
       <form 
         onSubmit={handleSubmit} 
         className="flex justify-center mt-10 gap-4">
@@ -49,10 +56,18 @@ export default function Home() {
         className="outline-none py-2 px-4 w-[400px] border-none text-lg text-gray-300 rounded-lg bg-purple-700"/>
         <button 
         type="submit"
-        className="bg-purple-600 rounded-lg text-gray-300 font-sans font-bold text-lg px-4 py-2">Generate URL</button>
+        className="bg-purple-700 rounded-lg text-gray-300 font-sans font-bold text-lg px-4 py-2">Generate URL</button>
       </form>
       {urlShown &&
-        <h2 className="text-white font-bold text-3xl font-sans mt-10">{`localhost:3000/${code}`}</h2>
+        <div className="relative px-8 py-6 mt-5 rounded-lg flex justify-center items-center bg-purple-700">
+          <h2 className="text-white font-bold text-3xl font-sans">{`localhost:3000/${code}`}</h2>
+          <button
+            onClick={handleCopy}
+            className="absolute bottom-0 right-0 p-2 transperant"
+            >
+            <Copy size={15} className="text-white"/>
+          </button>
+        </div>
       }
     </div>
   )
