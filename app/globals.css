@@ -6,7 +6,7 @@
   --color-background: #2C1A40;
 }
 body {
-  background: #1A1625;
+  background: linear-gradient(to bottom right, #1a0033, #000000);
   color: #000000;
   font-family: Arial, Helvetica, sans-serif;
 }
