@@ -44,7 +44,7 @@ export default function Home() {
     setShown(true);
     setTimeout(() => {
       setShown(false);
-    }, 1000);
+    }, 500);
   }
 
   return (
