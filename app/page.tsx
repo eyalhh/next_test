@@ -1,16 +1,17 @@
 "use client"
 
 import { Copy } from 'lucide-react'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function Home() {
-  console.log(" == in client == ")
+  
+  console.log(" == in client == ");
 
   const [url, setUrl] = useState("");
   const [code, setCode] = useState("");
   const [urlShown, setUrlShown] = useState(false);
-
+  const [shown, setShown] = useState(false);
   
 
 
@@ -40,6 +41,10 @@ export default function Home() {
 
   function handleCopy() {
     navigator.clipboard.writeText(`localhost:3000/${code}`);
+    setShown(true);
+    setTimeout(() => {
+      setShown(false);
+    }, 1000);
   }
 
   return (
@@ -59,13 +64,16 @@ export default function Home() {
         className="bg-purple-700 rounded-lg text-gray-300 font-sans font-bold text-lg px-4 py-2">Generate URL</button>
       </form>
       {urlShown &&
-        <div className="relative px-8 py-6 mt-5 rounded-lg flex justify-center items-center bg-purple-700">
+        <div className="relative px-10 py-8 mt-5 rounded-lg flex justify-center items-center bg-purple-700">
           <h2 className="text-white font-bold text-3xl font-sans">{`localhost:3000/${code}`}</h2>
           <button
             onClick={handleCopy}
             className="absolute bottom-0 right-0 p-2 transperant"
             >
             <Copy size={15} className="text-white"/>
+            {shown && 
+              <p className="font-bold font-sans absolute text-white text-sm bottom-5 right-0 ">Copied!</p>
+            }
           </button>
         </div>
       }
